@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02029D932849FDB800941EAB /* ContactDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02029D922849FDB800941EAB /* ContactDetailsViewController.swift */; };
 		025D7C1228487DFE0045FBA5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025D7C1128487DFE0045FBA5 /* AppDelegate.swift */; };
 		025D7C1428487DFE0045FBA5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025D7C1328487DFE0045FBA5 /* SceneDelegate.swift */; };
 		025D7C1628487DFE0045FBA5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025D7C1528487DFE0045FBA5 /* ViewController.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		02029D922849FDB800941EAB /* ContactDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailsViewController.swift; sourceTree = "<group>"; };
 		025D7C0E28487DFE0045FBA5 /* contactBoook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = contactBoook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		025D7C1128487DFE0045FBA5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		025D7C1328487DFE0045FBA5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +43,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		02029D912849FD9000941EAB /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				025D7C292848C98A0045FBA5 /* AddContactViewController.swift */,
+				025D7C1528487DFE0045FBA5 /* ViewController.swift */,
+				02029D922849FDB800941EAB /* ContactDetailsViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		025D7C0528487DFE0045FBA5 = {
 			isa = PBXGroup;
 			children = (
@@ -60,15 +72,14 @@
 		025D7C1028487DFE0045FBA5 /* contactBoook */ = {
 			isa = PBXGroup;
 			children = (
+				02029D912849FD9000941EAB /* Controllers */,
 				025D7C1128487DFE0045FBA5 /* AppDelegate.swift */,
 				025D7C1328487DFE0045FBA5 /* SceneDelegate.swift */,
-				025D7C1528487DFE0045FBA5 /* ViewController.swift */,
 				025D7C1A28487DFF0045FBA5 /* Assets.xcassets */,
 				025D7C1C28487DFF0045FBA5 /* LaunchScreen.storyboard */,
 				025D7C1F28487DFF0045FBA5 /* Info.plist */,
 				025D7C25284880960045FBA5 /* ContactDetails.swift */,
 				025D7C27284886BF0045FBA5 /* ContactsTableViewCell.swift */,
-				025D7C292848C98A0045FBA5 /* AddContactViewController.swift */,
 			);
 			path = contactBoook;
 			sourceTree = "<group>";
@@ -144,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				025D7C1628487DFE0045FBA5 /* ViewController.swift in Sources */,
+				02029D932849FDB800941EAB /* ContactDetailsViewController.swift in Sources */,
 				025D7C26284880960045FBA5 /* ContactDetails.swift in Sources */,
 				025D7C28284886BF0045FBA5 /* ContactsTableViewCell.swift in Sources */,
 				025D7C2A2848C98A0045FBA5 /* AddContactViewController.swift in Sources */,

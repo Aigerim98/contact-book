@@ -44,7 +44,9 @@ class ContactsTableViewCell: UITableViewCell {
         didSet{
             guard let contactItem = contact else {return}
             if let name = contactItem.name {
-                profileImageView.image = UIImage(named: contactItem.image ?? "")
+                //profileImageView.image = UIImage(named: contactItem.image ?? "")
+                let image = "\(contactItem.gender)"
+                profileImageView.image = UIImage(named: "\(image).png")
                 nameLabel.text = name
                 phoneNumberLabel.text = contactItem.phoneNUmber
             }

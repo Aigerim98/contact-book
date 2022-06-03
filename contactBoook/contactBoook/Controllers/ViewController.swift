@@ -13,8 +13,8 @@ class ViewController: UIViewController {
     var safeArea: UILayoutGuide!
     
     var contacts: [Contact] = [
-        Contact.init(name: "Aigerim Abdurakhmanova", phoneNUmber: "87002223344", image: "contact.png"),
-        Contact.init(name: "Galya Abdurakhmanova", phoneNUmber: "87013334456", image: "contact.png")
+        Contact.init(name: "Aigerim Abdurakhmanova", phoneNUmber: "87002223344", gender: "female"),
+        Contact.init(name: "Galya Abdurakhmanova", phoneNUmber: "87013334456", gender: "female")
     ]
     
     override func viewDidLoad() {
@@ -60,7 +60,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "contactCell", for: indexPath) as! ContactsTableViewCell
-        
         cell.contact = contacts[indexPath.row]
         return cell
     }
@@ -78,6 +77,15 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
             contacts.remove(at: indexPath.row)
             tableView.reloadData()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let vc = ContactDetailsViewController()
+        vc.contact = contacts[indexPath.row]
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

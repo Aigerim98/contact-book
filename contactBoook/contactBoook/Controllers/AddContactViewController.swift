@@ -14,6 +14,8 @@ protocol AddContactDelegate: AnyObject {
 class AddContactViewController: UIViewController {
 
     weak var delegate: AddContactDelegate?
+    let genders: [String] = ["male", "female"]
+    var selectedGender: String?
     
     let fullNameTextField: UITextField = {
         let textField = UITextField()
@@ -40,24 +42,31 @@ class AddContactViewController: UIViewController {
         return button
     }()
     
+    let genderPicker = UIPickerView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(fullNameTextField)
         view.addSubview(phoneNumberTextField)
         view.addSubview(saveButton)
+        view.addSubview(genderPicker)
         view.backgroundColor = .white
+        genderPicker.delegate = self
+        genderPicker.dataSource = self
         setUpConstraints()
+        selectedGender = genders[0]
     }
     
     @objc private func saveTapped() {
         guard let fullname = fullNameTextField.text, fullNameTextField.hasText else {
             return
         }
+        
         guard let phoneNumber = phoneNumberTextField.text, phoneNumberTextField.hasText else {
             return
         }
         
-        let contact = Contact(name: fullname, phoneNUmber: phoneNumber)
+        let contact = Contact(name: fullname, phoneNUmber: phoneNumber,image: "\(selectedGender).png", gender: selectedGender ?? "")
         delegate?.addContact(contact: contact)
         self.navigationController?.popViewController(animated: true)
     }
@@ -74,11 +83,41 @@ class AddContactViewController: UIViewController {
         phoneNumberTextField.trailingAnchor.constraint(equalTo: fullNameTextField.trailingAnchor).isActive = true
         phoneNumberTextField.heightAnchor.constraint(equalToConstant: view.frame.height * 0.05).isActive = true
         
-        saveButton.topAnchor.constraint(equalTo: phoneNumberTextField.bottomAnchor, constant: 100).isActive = true
+        genderPicker.translatesAutoresizingMaskIntoConstraints = false
+        genderPicker.topAnchor.constraint(equalTo: phoneNumberTextField.bottomAnchor, constant: 50).isActive = true
+        genderPicker.leadingAnchor.constraint(equalTo: fullNameTextField.leadingAnchor).isActive = true
+        genderPicker.trailingAnchor.constraint(equalTo: fullNameTextField.trailingAnchor).isActive = true
+        genderPicker.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        
+        saveButton.topAnchor.constraint(equalTo: genderPicker.bottomAnchor, constant: 100).isActive = true
         saveButton.leadingAnchor.constraint(equalTo: fullNameTextField.leadingAnchor).isActive = true
         saveButton.trailingAnchor.constraint(equalTo: fullNameTextField.trailingAnchor).isActive = true
         saveButton.heightAnchor.constraint(equalToConstant: view.frame.height * 0.05).isActive = true
+        
     }
     
+}
 
+extension AddContactViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        genders.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        let row = genders[row]
+        return row
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+            // use the row to get the selected row from the picker view
+            // using the row extract the value from your datasource (array[row])
+        selectedGender = genders[row]
+        print(genders[row])
+    }
 }

@@ -12,4 +12,5 @@ struct Contact {
     var name: String?
     var phoneNUmber: String?
     var image: String?
+    var gender: String
 }
