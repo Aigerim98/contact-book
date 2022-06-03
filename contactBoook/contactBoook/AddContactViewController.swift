@@ -13,7 +13,7 @@ protocol AddContactDelegate: AnyObject {
 
 class AddContactViewController: UIViewController {
 
-    weak var delagate: AddContactDelegate?
+    weak var delegate: AddContactDelegate?
     
     let fullNameTextField: UITextField = {
         let textField = UITextField()
@@ -30,11 +30,39 @@ class AddContactViewController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
+    
+    let saveButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .systemBlue
+        button.setTitle("Save", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(fullNameTextField)
         view.addSubview(phoneNumberTextField)
+        view.addSubview(saveButton)
+        view.backgroundColor = .white
+        setUpConstraints()
+    }
+    
+    @objc private func saveTapped() {
+        guard let fullname = fullNameTextField.text, fullNameTextField.hasText else {
+            return
+        }
+        guard let phoneNumber = phoneNumberTextField.text, phoneNumberTextField.hasText else {
+            return
+        }
         
+        let contact = Contact(name: fullname, phoneNUmber: phoneNumber)
+        delegate?.addContact(contact: contact)
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func setUpConstraints() {
         fullNameTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25).isActive = true
         fullNameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
         fullNameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
@@ -45,9 +73,12 @@ class AddContactViewController: UIViewController {
         phoneNumberTextField.leadingAnchor.constraint(equalTo: fullNameTextField.leadingAnchor).isActive = true
         phoneNumberTextField.trailingAnchor.constraint(equalTo: fullNameTextField.trailingAnchor).isActive = true
         phoneNumberTextField.heightAnchor.constraint(equalToConstant: view.frame.height * 0.05).isActive = true
-        view.backgroundColor = .white
+        
+        saveButton.topAnchor.constraint(equalTo: phoneNumberTextField.bottomAnchor, constant: 100).isActive = true
+        saveButton.leadingAnchor.constraint(equalTo: fullNameTextField.leadingAnchor).isActive = true
+        saveButton.trailingAnchor.constraint(equalTo: fullNameTextField.trailingAnchor).isActive = true
+        saveButton.heightAnchor.constraint(equalToConstant: view.frame.height * 0.05).isActive = true
     }
     
-
 
 }

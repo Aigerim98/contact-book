@@ -46,10 +46,8 @@ class ViewController: UIViewController {
     }
     
     @objc private func addTapped() {
-//        let vc = UIViewController()
-//        vc.view.backgroundColor = .white
-//        navigationController?.pushViewController(vc, animated: true)
         let vc = AddContactViewController()
+        vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -69,5 +67,24 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         100
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            contacts.remove(at: indexPath.row)
+            tableView.reloadData()
+        }
+    }
+}
+
+extension ViewController: AddContactDelegate {
+    
+    func addContact(contact: Contact) {
+        self.contacts.append(contact)
+        self.tableView.reloadData()
     }
 }
