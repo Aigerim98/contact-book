@@ -7,12 +7,45 @@
 
 import UIKit
 
+protocol AddContactDelegate: AnyObject {
+    func addContact(contact: Contact)
+}
+
 class AddContactViewController: UIViewController {
 
+    weak var delagate: AddContactDelegate?
+    
+    let fullNameTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Full Name"
+        textField.textAlignment = .left
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
+    let phoneNumberTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Phone Number"
+        textField.textAlignment = .left
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(fullNameTextField)
+        view.addSubview(phoneNumberTextField)
+        
+        fullNameTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25).isActive = true
+        fullNameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
+        fullNameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
+        fullNameTextField.heightAnchor.constraint(equalToConstant: view.frame.height * 0.05).isActive = true
+        //fullNameTextField.becomeFirstResponder()
+        
+        phoneNumberTextField.topAnchor.constraint(equalTo: fullNameTextField.bottomAnchor, constant: 5).isActive = true
+        phoneNumberTextField.leadingAnchor.constraint(equalTo: fullNameTextField.leadingAnchor).isActive = true
+        phoneNumberTextField.trailingAnchor.constraint(equalTo: fullNameTextField.trailingAnchor).isActive = true
+        phoneNumberTextField.heightAnchor.constraint(equalToConstant: view.frame.height * 0.05).isActive = true
         view.backgroundColor = .white
-        // Do any additional setup after loading the view.
     }
     
 

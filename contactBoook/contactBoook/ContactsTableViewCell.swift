@@ -11,10 +11,12 @@ class ContactsTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         self.contentView.addSubview(profileImageView)
         containerView.addSubview(nameLabel)
         containerView.addSubview(phoneNumberLabel)
         self.contentView.addSubview(containerView)
+        
         profileImageView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
         profileImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 10).isActive = true
         profileImageView.widthAnchor.constraint(equalToConstant: 70).isActive = true

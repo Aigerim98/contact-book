@@ -41,11 +41,8 @@ class ViewController: UIViewController {
     func setUpNaviagtion() {
         navigationItem.title = "Contacts"
         self.navigationController?.view.backgroundColor = .white
-//        self.navigationController?.navigationBar.backgroundColor = .clear
-//        self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "+", style: .done, target: self, action: #selector(addTapped))
-
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
     }
     
     @objc private func addTapped() {
