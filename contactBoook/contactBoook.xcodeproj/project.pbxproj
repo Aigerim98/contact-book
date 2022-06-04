@@ -16,6 +16,7 @@
 		025D7C26284880960045FBA5 /* ContactDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025D7C25284880960045FBA5 /* ContactDetails.swift */; };
 		025D7C28284886BF0045FBA5 /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025D7C27284886BF0045FBA5 /* ContactsTableViewCell.swift */; };
 		025D7C2A2848C98A0045FBA5 /* AddContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025D7C292848C98A0045FBA5 /* AddContactViewController.swift */; };
+		393166FC284B4310001B6162 /* EditContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393166FB284B4310001B6162 /* EditContactViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		025D7C25284880960045FBA5 /* ContactDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetails.swift; sourceTree = "<group>"; };
 		025D7C27284886BF0045FBA5 /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
 		025D7C292848C98A0045FBA5 /* AddContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContactViewController.swift; sourceTree = "<group>"; };
+		393166FB284B4310001B6162 /* EditContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditContactViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +51,7 @@
 				025D7C292848C98A0045FBA5 /* AddContactViewController.swift */,
 				025D7C1528487DFE0045FBA5 /* ViewController.swift */,
 				02029D922849FDB800941EAB /* ContactDetailsViewController.swift */,
+				393166FB284B4310001B6162 /* EditContactViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 				025D7C1628487DFE0045FBA5 /* ViewController.swift in Sources */,
 				02029D932849FDB800941EAB /* ContactDetailsViewController.swift in Sources */,
 				025D7C26284880960045FBA5 /* ContactDetails.swift in Sources */,
+				393166FC284B4310001B6162 /* EditContactViewController.swift in Sources */,
 				025D7C28284886BF0045FBA5 /* ContactsTableViewCell.swift in Sources */,
 				025D7C2A2848C98A0045FBA5 /* AddContactViewController.swift in Sources */,
 				025D7C1228487DFE0045FBA5 /* AppDelegate.swift in Sources */,

@@ -14,10 +14,10 @@ protocol AddContactDelegate: AnyObject {
 class AddContactViewController: UIViewController {
 
     weak var delegate: AddContactDelegate?
-    let genders: [String] = ["male", "female"]
-    var selectedGender: String?
+    private let genders: [String] = ["male", "female"]
+    private var selectedGender: String?
     
-    let fullNameTextField: UITextField = {
+    private let fullNameTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Full Name"
         textField.textAlignment = .left
@@ -25,7 +25,7 @@ class AddContactViewController: UIViewController {
         return textField
     }()
     
-    let phoneNumberTextField: UITextField = {
+    private let phoneNumberTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Phone Number"
         textField.textAlignment = .left
@@ -33,7 +33,7 @@ class AddContactViewController: UIViewController {
         return textField
     }()
     
-    let saveButton: UIButton = {
+    private let saveButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .systemBlue
         button.setTitle("Save", for: .normal)
@@ -42,7 +42,7 @@ class AddContactViewController: UIViewController {
         return button
     }()
     
-    let genderPicker = UIPickerView()
+    private let genderPicker = UIPickerView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,12 +71,11 @@ class AddContactViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    func setUpConstraints() {
+    private func setUpConstraints() {
         fullNameTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25).isActive = true
         fullNameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
         fullNameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
         fullNameTextField.heightAnchor.constraint(equalToConstant: view.frame.height * 0.05).isActive = true
-        //fullNameTextField.becomeFirstResponder()
         
         phoneNumberTextField.topAnchor.constraint(equalTo: fullNameTextField.bottomAnchor, constant: 5).isActive = true
         phoneNumberTextField.leadingAnchor.constraint(equalTo: fullNameTextField.leadingAnchor).isActive = true
@@ -115,9 +114,6 @@ extension AddContactViewController: UIPickerViewDelegate, UIPickerViewDataSource
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-            // use the row to get the selected row from the picker view
-            // using the row extract the value from your datasource (array[row])
         selectedGender = genders[row]
-        print(genders[row])
     }
 }

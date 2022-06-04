@@ -9,8 +9,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    let tableView = UITableView()
-    var safeArea: UILayoutGuide!
+    private let tableView = UITableView()
+    private var safeArea: UILayoutGuide!
     
     var contacts: [Contact] = [
         Contact.init(name: "Aigerim Abdurakhmanova", phoneNUmber: "87002223344", gender: "female"),
@@ -24,7 +24,7 @@ class ViewController: UIViewController {
         setUpNaviagtion()
     }
     
-    func setupTableView() {
+    private func setupTableView() {
         
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         tableView.dataSource = self
     }
     
-    func setUpNaviagtion() {
+    private func setUpNaviagtion() {
         navigationItem.title = "Contacts"
         self.navigationController?.view.backgroundColor = .white
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
@@ -84,7 +84,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         
         let vc = ContactDetailsViewController()
         vc.contact = contacts[indexPath.row]
-        
+        vc.index = indexPath.row
         navigationController?.pushViewController(vc, animated: true)
     }
 }
