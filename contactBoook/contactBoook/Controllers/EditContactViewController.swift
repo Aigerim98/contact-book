@@ -7,14 +7,24 @@
 
 import UIKit
 
-protocol EditContactDetails: AnyObject {
-    func editedContact(row: Int, contact: Contact)
+protocol EditContactDetailsDelegate: AnyObject {
+    func editedContact(newContact: Contact)
 }
 
 class EditContactViewController: UIViewController {
     
-    weak var delegate: EditContactDetails?
-    var index: Int?
+    weak var delegate: EditContactDetailsDelegate?
+    var contact: Contact? {
+        didSet{
+            guard let contactItem = contact else {return}
+            if var name = contactItem.name {
+                nameTextField.text = name
+                phoneNumberTextField.text = contactItem.phoneNumber
+                selectedGender = contactItem.gender
+            }
+        }
+    }
+    
     let genders: [String] = ["male", "female"]
     var selectedGender: String?
     
@@ -29,7 +39,7 @@ class EditContactViewController: UIViewController {
     
     private let nameTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Full Name"
+        //textField.placeholder = "Full Name"
         textField.textAlignment = .left
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
@@ -37,7 +47,7 @@ class EditContactViewController: UIViewController {
     
     private let phoneNumberTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Phone Number"
+        //textField.placeholder = "Phone Number"
         textField.textAlignment = .left
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
@@ -47,12 +57,14 @@ class EditContactViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(nameTextField)
         view.addSubview(phoneNumberTextField)
+        view.addSubview(genderPicker)
+        
         genderPicker.delegate = self
         genderPicker.dataSource = self
+        phoneNumberTextField.delegate = self
         
-        selectedGender = genders[0]
         setUpConstraints()
-        setUpNaviagtion()
+        setUpNavigation()
     }
     
     private func setUpConstraints() {
@@ -60,7 +72,7 @@ class EditContactViewController: UIViewController {
         nameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
         nameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 10).isActive = true
         
-        phoneNumberTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 10).isActive = true
+        phoneNumberTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 50).isActive = true
         phoneNumberTextField.leadingAnchor.constraint(equalTo: nameTextField.leadingAnchor).isActive = true
         phoneNumberTextField.trailingAnchor.constraint(equalTo: nameTextField.trailingAnchor).isActive = true
         
@@ -72,7 +84,7 @@ class EditContactViewController: UIViewController {
         
     }
     
-    private func setUpNaviagtion() {
+    private func setUpNavigation() {
         navigationItem.title = "Edit Contact"
         self.navigationController?.view.backgroundColor = .white
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
@@ -81,7 +93,6 @@ class EditContactViewController: UIViewController {
     }
     
     @objc private func doneTapped() {
-        let vc = ViewController()
         
         guard let name = nameTextField.text, nameTextField.hasText else {
             return
@@ -91,9 +102,10 @@ class EditContactViewController: UIViewController {
             return
         }
         
-        let contact = Contact(name: name, phoneNUmber: phoneNumber, image: "\(selectedGender).png", gender: selectedGender ?? "")
-        delegate?.editedContact(row: index ?? 0, contact: contact)
-        self.navigationController?.pushViewController(vc, animated: true)
+        let contact = Contact(name: name, phoneNumber: phoneNumber, image: "\(selectedGender).png", gender: selectedGender)
+
+        delegate?.editedContact(newContact: contact)
+        navigationController?.popViewController(animated: true)
     }
 
     @objc private func cancelTapped() {
@@ -118,6 +130,17 @@ extension EditContactViewController: UIPickerViewDelegate, UIPickerViewDataSourc
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedGender = genders[row]
+    }
+}
+
+extension EditContactViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == phoneNumberTextField {
+            let allowedCharacters = CharacterSet(charactersIn:"+0123456789 ")//Here change this characters based on your requirement
+            let characterSet = CharacterSet(charactersIn: string)
+            return allowedCharacters.isSuperset(of: characterSet)
+        }
+        return true
     }
 }
 

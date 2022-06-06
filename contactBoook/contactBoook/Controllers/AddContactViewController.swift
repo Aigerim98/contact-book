@@ -53,6 +53,7 @@ class AddContactViewController: UIViewController {
         view.backgroundColor = .white
         genderPicker.delegate = self
         genderPicker.dataSource = self
+        phoneNumberTextField.delegate = self
         setUpConstraints()
         selectedGender = genders[0]
     }
@@ -66,7 +67,7 @@ class AddContactViewController: UIViewController {
             return
         }
         
-        let contact = Contact(name: fullname, phoneNUmber: phoneNumber,image: "\(selectedGender).png", gender: selectedGender ?? "")
+        let contact = Contact(name: fullname, phoneNumber: phoneNumber,image: "\(selectedGender).png", gender: selectedGender)
         delegate?.addContact(contact: contact)
         self.navigationController?.popViewController(animated: true)
     }
@@ -115,5 +116,16 @@ extension AddContactViewController: UIPickerViewDelegate, UIPickerViewDataSource
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedGender = genders[row]
+    }
+}
+
+extension AddContactViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == phoneNumberTextField {
+            let allowedCharacters = CharacterSet(charactersIn:"+0123456789 ")
+            let characterSet = CharacterSet(charactersIn: string)
+            return allowedCharacters.isSuperset(of: characterSet)
+        }
+        return true
     }
 }

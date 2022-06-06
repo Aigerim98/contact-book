@@ -10,7 +10,7 @@ import UIKit
 
 struct Contact {
     var name: String?
-    var phoneNUmber: String?
+    var phoneNumber: String?
     var image: String?
-    var gender: String
+    var gender: String?
 }
